@@ -5,16 +5,20 @@ function App() {
       <header>
         <a href='/'>Amazonaa</a>
       </header>
-      <main>Listing</main>
-      {
-        data.products.map(product =>(
-          <div>
+      <main>
+      <h1>Featured Products</h1>
+      <div className="products">
+      { data.products.map((product) =>(
+          <div className="product" key={product.slug}>
             <img src={product.image} alt={product.image}/>
+            <div className="product-info">
             <p>{product.name}</p>
             <p>{product.price}</p>
+            </div>
           </div>
-        ))
-      }
+        ))}
+      </div>  
+      </main>
     </div>
   );
 }
