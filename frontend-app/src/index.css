@@ -39,8 +39,15 @@ main {
   padding: 1rem;
 }
 
-.button {
-  padding: 5px;
-  margin: 5px;
-  cursor: pointer;
+.btn {
+  background-color: #f0c040;
+  color: black;
+}
+
+.rating span {
+  color: #ffc000;
+}
+
+.img-large {
+  max-width: 100%;
 }

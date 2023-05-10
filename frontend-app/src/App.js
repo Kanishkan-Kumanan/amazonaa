@@ -20,7 +20,7 @@ function App() {
         </Navbar>
       </header>
       <main>
-     <Container> 
+     <Container className="mt-3"> 
       <h1>Featured Products</h1>
         <Routes>
           <Route path="/" element={<HomeScreen />} />
