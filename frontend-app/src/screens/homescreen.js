@@ -51,6 +51,7 @@ function HomeScreen(){
         <title>Amazonaa</title>
       </Helmet>
       <div className="products">
+      <h1>Featured Products</h1>  
       {loading ? (
           <LoadingBox />
         ):error ? (

@@ -8,6 +8,8 @@ import Badge from "react-bootstrap/Badge";
 import Nav from "react-bootstrap/Nav";
 import { Store } from "./Store";
 import { useContext } from "react";
+import CartScreen from "./screens/CartScreen";
+import SignInScreen from "./screens/SignInScreen";
 
 function App() {
 
@@ -38,10 +40,11 @@ function App() {
       </header>
       <main>
      <Container className="mt-3"> 
-      <h1>Featured Products</h1>
-        <Routes>
+      <Routes>
           <Route path="/" element={<HomeScreen />} />
           <Route path="/products/:slug" element={<ProductScreen />} />
+          <Route path="/cart" element={<CartScreen/>}/>
+          <Route path="/signin" element={<SignInScreen/>} />
         </Routes>
       </Container>  
       </main>
