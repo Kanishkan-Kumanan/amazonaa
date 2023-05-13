@@ -1,31 +1,26 @@
 const express = require('express');
 const data = require("./data.js");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+const seedRouter = require('./routes/seedRoutes.js');
+const productRouter = require('./routes/productRoutes.js');
+
+dotenv.config();
 
 const app = express();
 
+app.use("/api/seed",seedRouter);
+app.use("/api/products",productRouter);
+
 const port = process.env.PORT || 5000;
 
-app.get("/api/products",(req,res)=>{
-    res.send(data.products);
+mongoose.connect(process.env.MONGODB_URL).then(() =>{
+    console.log("Connected to Mongodb")
+}).catch(err =>{
+    console.log(err.message);
 })
 
-app.get("/api/products/slug/:slug",(req,res)=>{
-    const product = data.products.find((x) => x.slug === req.params.slug)
-    if(product){
-        res.send(product);
-    }else{
-        res.status(404).send({message:"No such item found"});
-    }
-})
 
-app.get("/api/products/:id",(req,res)=>{
-    const product = data.products.find((x) => x._id === req.params.id)
-    if(product){
-        res.send(product);
-    }else{
-        res.status(404).send({message:"No such item found"});
-    }
-})
 
 app.listen(port,()=>{
     console.log("Server is running");
