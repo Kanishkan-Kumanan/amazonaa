@@ -56,18 +56,18 @@ export default function CheckOutScreen() {
 
     cart.totalPrice = cart.itemsPrice + cart.shippingPrice + cart.taxPrice;
 
-    const placeOrderHandler = async () =>{
+    const placeOrderHandler = async (e) =>{
+        e.preventDefault();
         try{
             dispatch({ type: "CREATE_REQUEST"});
 
             const {data} = await axios.post(
-              '/api/orders', {
-
+              '/api/orders/', {
                 orderItems: cart.cartItems,
                 shippingAddress : cart.shippingAddress,
                 paymentMethod : cart.paymentMethod,
                 itemsPrice : cart.itemsPrice,
-                shippingPrice: cart.shippingAddress,
+                shippingPrice: cart.shippingPrice,
                 taxPrice : cart.taxPrice,
                 totalPrice: cart.totalPrice,
             },{
