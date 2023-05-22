@@ -26,8 +26,8 @@ function reducer(state, action){
         case 'PAY_SUCCESS':
           return {...state,loadingPay: false, successPay: true};
         case 'PAY_FAIL':
-          return {...state,loadingPay: false, errorPay: action.payload};
-        case 'PAY_REST':
+          return {...state,loadingPay: false};
+        case 'PAY_RESET':
           return {...state, loadingPay: false, successPay: false}; 
 
         default:
@@ -44,7 +44,7 @@ export default function OrderScreen() {
     const navigate = useNavigate();
 
     const [{ loading, error, order,successPay,loadingPay},dispatch] = useReducer(reducer,{
-        loading : true,
+        loading: true,
         order: {},
         error: "",
         successPay: false,
@@ -95,7 +95,7 @@ export default function OrderScreen() {
       try{
         dispatch({type: 'FETCH_REQUEST'});
         const { data } = await axios.get(`/api/orders/${orderId}`,{
-            headers : { authorization : `Bearer ${userInfo.token}`},
+            headers : { authorization: `Bearer ${userInfo.token}`},
         });
         dispatch({type: 'FETCH_SUCCESS', payload: data})
       }catch(err){
@@ -107,9 +107,7 @@ export default function OrderScreen() {
         return navigate('/login');
       }
 
-      if(
-        !order._id || successPay || (
-            order._id && order._id !== orderId)){
+      if(!order._id || successPay || (order._id && order._id !== orderId)){
         fetchOrder();
         if (successPay){
           dispatch({type: 'PAY_RESET'})

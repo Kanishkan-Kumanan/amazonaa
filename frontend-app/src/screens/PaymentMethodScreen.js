@@ -11,7 +11,7 @@ export default function PaymentMethodScreen() {
     const navigate = useNavigate();
     const {state, dispatch: ctxDispatch} = useContext(Store);
     const {
-        cart :  {shippingAddress, paymentMethod},
+        cart :  {shippingAddress},
     } = state;
 
     useEffect(()=>{
