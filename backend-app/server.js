@@ -6,6 +6,7 @@ const seedRouter = require('./routes/seedRoutes.js');
 const productRouter = require('./routes/productRoutes.js');
 const userRouter = require('./routes/userRoutes.js');
 const orderRouter = require('./routes/orderRoutes.js');
+const path = require("path");
 
 dotenv.config();
 
@@ -23,6 +24,12 @@ app.use("/api/products",productRouter);
 app.use("/api/users",userRouter);
 app.use("/api/orders",orderRouter);
 
+var __dirname = path.resolve();
+
+app.use(express.static(path.join(__dirname,'/frontend-app/build')));
+
+app.get('*',(req,res) =>
+res.sendFile(path.join(__dirname,'/frontend-app/build/index.html')));
 
 app.use((err,req,res,next) =>{
     res.status(500).send({message:err.message});
